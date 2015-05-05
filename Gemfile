@@ -33,3 +33,11 @@ gem 'haml-rails'
 group :development, :test do
   gem 'rspec-rails'
 end
+
+group :development, :test do
+  gem 'pry-rails'
+  gem 'pry-byebug'
+  gem 'pry-stack_explorer'
+  gem 'binding_of_caller'
+  gem 'better_errors'
+end

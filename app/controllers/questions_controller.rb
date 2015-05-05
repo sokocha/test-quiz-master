@@ -28,6 +28,8 @@ class QuestionsController < ApplicationController
 
   def answer
     # TODO
+    @question = Question.find(params[:id])
+    render :answer
   end
 
   private
