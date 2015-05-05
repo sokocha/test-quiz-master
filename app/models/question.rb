@@ -4,7 +4,9 @@ class Question < ActiveRecord::Base
   validates_presence_of :answer
 
   def is_correct?(submission)
-    answer == submission
+    answer.split.join(" ").downcase == submission.split.join(" ").downcase
   end
+
+
 
 end
