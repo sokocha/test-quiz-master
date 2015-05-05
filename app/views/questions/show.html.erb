@@ -1,0 +1,16 @@
+
+<div class = "container">
+  <h1>Question time...</h1> 
+  <div class = "well">
+    <p> <%= @question.question  %></p>
+    <%= form_for @question, method: :patch do |f| -%>
+      <%= f.text_field :submission %>
+        <%= f.submit 'Submit Answer'  %>
+    <% end -%>
+  </div>
+</div>
+
+
+
+
+

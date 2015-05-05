@@ -20,7 +20,8 @@ class QuestionsController < ApplicationController
 
   def update
     if @question.update_attributes question_params
-      redirect_to root_path, notice: 'Question saved successfully.'
+      # redirect_to root_path, notice: 'Question saved successfully.'
+      render :answer
     else
       render :edit
     end
@@ -29,6 +30,7 @@ class QuestionsController < ApplicationController
   def answer
     # TODO
     @question = Question.find(params[:id])
+    @submission = @question.submission
     render :answer
   end
 
@@ -36,9 +38,10 @@ class QuestionsController < ApplicationController
 
   def find_question
     @question = Question.find(params[:id])
+    @submission = @question.submission
   end
 
   def question_params
-    params.require(:question).permit(:question, :answer)
+    params.require(:question).permit(:question, :answer, :submission)
   end
 end
