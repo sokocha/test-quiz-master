@@ -10,37 +10,49 @@ RSpec.describe QuestionsController, :type => :controller do
 
  describe 'GET index' do
   it 'populates an array of questions' do
+    question = FactoryGirl.create(:question)
+    get :index
+    assigns(:questions).should eq([question])
   end
   it 'renders the :index template' do
+    get :index
+    response.should render_template :index
   end
 end
 
-describe 'GET show' do
-  it 'assigns requested question to @question' do
-  end
-  it 'renders the :show template' do
-  end
-end
+# describe 'GET show' do
+#   it 'assigns requested question to @question' do
+#   end
+#   it 'renders the :show template' do
+#   end
+# end
 
-describe 'GET new' do
-  it 'assigns a new question to @question' do
-  end
-  it 'renders the :new template' do
-  end
-end
+# describe 'GET new' do
+#   it 'assigns a new question to @question' do
+#     get :new
+#   end
+#   it 'renders the :new template' do
+#   end
+# end
 
 describe 'POST create' do
   context 'with valid attributes' do 
-    it 'saves the new question to the database' do
+    it 'creates a new question' do
+      expect{ post :create, question: FactoryGirl.attributes_for(:question) }.to change(Question,:count).by(1)
     end
-    it 'redirects to the home page' do
-    end
+    # it 'redirects to the home page' do
+    #   expect{ post :create, question: FactoryGirl.attributes_for(:question) }.to change(Question,:count).by(1)
+    #   expect(response).to redirect_to Question.last
+    # end
   end
 
   context 'with invalid attributes' do
     it 'does not save the new question to the database' do
+      expect{ post :create, question: FactoryGirl.attributes_for(:invalid_question) }.to_not change(Question,:count)
     end
     it 're-renders the new template' do
+      post :create, question: FactoryGirl.attributes_for(:invalid_question)
+      response.should render_template(:new)
     end
   end
 end

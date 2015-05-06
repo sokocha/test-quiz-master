@@ -6,4 +6,8 @@ FactoryGirl.define do
     f.answer {Faker::Number.digit}
     f.submission {Faker::Number.digit}
   end
+
+  factory :invalid_question, parent: :question do |f|
+    f.question nil
+  end
 end
