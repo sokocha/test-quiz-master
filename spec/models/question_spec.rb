@@ -20,4 +20,15 @@ describe Question, :type => :model do
       expect(Question.new(answer: "seven").is_correct?("7")).to be true
     end
   end
+
+# Added tests for validations
+  context 'validations' do
+    it "is invalid without an actual question" do
+      FactoryGirl.build(:question, question: nil).should_not be_valid
+    end
+
+    it "is invalid without an answer" do
+      FactoryGirl.build(:question, answer: nil).should_not be_valid
+    end
+  end
 end
