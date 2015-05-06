@@ -32,11 +32,7 @@ class QuestionsController < ApplicationController
     end
   end
 
-  # def answer
-  #   # TODO
-  #   @question = Question.find(params[:id])
-  #   @submission = @question.submission  
-  # end
+
 
   private
 

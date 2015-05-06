@@ -14,12 +14,17 @@ RSpec.describe QuestionsController, :type => :controller do
   end
 end
 
-# describe 'GET show' do
-#   it 'assigns requested question to @question' do
-#   end
-#   it 'renders the :show template' do
-#   end
-# end
+describe 'GET show' do
+  it 'assigns requested question to @question' do
+    question = FactoryGirl.create(:question)
+    get :show, id: question.id
+    assigns(:question).should eq(question)
+  end
+  it 'renders the :show template' do
+    get :show, id: FactoryGirl.create(:question)
+    response.should render_template :show
+  end
+end
 
 # describe 'GET new' do
 #   it 'assigns a new question to @question' do
