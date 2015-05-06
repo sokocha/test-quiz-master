@@ -7,17 +7,24 @@ class Question < ActiveRecord::Base
   validates_presence_of :question
   validates_presence_of :answer
 
-  def is_correct?(submission)
-    if answer.split.join(" ").downcase == submission.split.join(" ").downcase
-      true
-    elsif answer.split.join(" ").downcase != submission.split.join(" ").downcase
-      if submission.in_numbers.to_s == answer || submission.to_i.in_words == answer
-        true
-      else
-        false
-      end
-    end 
 
-  end
+
+  def is_correct?(submission)
+    if submission != nil
+      if answer.split.join(" ").downcase == submission.try(:split).join(" ").downcase
+        true
+      elsif answer.split.join(" ").downcase != submission.try(:split).join(" ").downcase
+        if submission.in_numbers.to_s == answer || submission.to_i.in_words == answer
+          true
+        else
+          false
+        end
+      end 
+    end
+end
+
+
+
+
 
 end

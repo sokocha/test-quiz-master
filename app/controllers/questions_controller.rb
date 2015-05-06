@@ -18,20 +18,25 @@ class QuestionsController < ApplicationController
     end
   end
 
+  def show
+    @question = Question.find(params[:id])
+    @submission = @question.try(:submission)  
+  end
+
   def update
     if @question.update_attributes question_params
       # redirect_to root_path, notice: 'Question saved successfully.'
-      render :answer
+      redirect_to question_path
     else
       render :edit
     end
   end
 
-  def answer
-    # TODO
-    @question = Question.find(params[:id])
-    @submission = @question.submission  
-  end
+  # def answer
+  #   # TODO
+  #   @question = Question.find(params[:id])
+  #   @submission = @question.submission  
+  # end
 
   private
 

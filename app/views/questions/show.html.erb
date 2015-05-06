@@ -1,12 +1,27 @@
-
 <div class = "container">
-  <h1>Question time...</h1> 
+  <h1><%= @question.question %></h1> 
+
   <div class = "well">
-    <p> <%= @question.question  %></p>
-    <%= form_for @question, method: :patch do |f| -%>
-      <%= f.text_field :submission %>
+
+    <% if @question.is_correct?(@submission) %>
+      <h3>correct!</h3>
+    
+    <% elsif @submission.nil? %>
+      <%= form_for @question, method: :patch do |f| -%>
+        <%= f.text_field :submission %>
         <%= f.submit 'Submit Answer'  %>
-    <% end -%>
+      <% end -%>
+
+    <% else %>
+      <h3>wrong!</h3>
+      <p> You answered <%= @question.submission %> to "<%= @question.question  %> " </p>
+
+      <%= form_for @question, method: :patch do |f| -%>
+        <%= f.text_field :submission %>
+        <%= f.submit 'Submit Answer'  %>
+      <% end -%>
+ 
+    <% end %>
   </div>
 </div>
 

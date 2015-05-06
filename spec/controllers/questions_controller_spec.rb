@@ -1,12 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe QuestionsController, :type => :controller do
- # describe "GET index" do
- #   it "has a 200 status code" do
- #     get :index
- #     expect(response.status).to eq(200)
- #   end
- #  end
 
  describe 'GET index' do
   it 'populates an array of questions' do
@@ -40,10 +34,10 @@ describe 'POST create' do
     it 'creates a new question' do
       expect{ post :create, question: FactoryGirl.attributes_for(:question) }.to change(Question,:count).by(1)
     end
-    # it 'redirects to the home page' do
-    #   expect{ post :create, question: FactoryGirl.attributes_for(:question) }.to change(Question,:count).by(1)
-    #   expect(response).to redirect_to Question.last
-    # end
+    it 'redirects to the home page' do
+      expect{ post :create, question: FactoryGirl.attributes_for(:question) }.to change(Question,:count).by(1)
+      expect(response).to redirect_to(root_path)
+    end
   end
 
   context 'with invalid attributes' do
@@ -56,6 +50,43 @@ describe 'POST create' do
     end
   end
 end
+
+# describe 'PUT update' do
+
+#   before :each do 
+#     @question = FactoryGirl.attributes_for(:question)
+#   end
+
+#   context 'with valid attributes' do
+#     it 'locates the requested contact for update' do
+#       put :update, id: @question, question: @question
+#       assigns(:question).should eq(@question)
+#     end
+
+#     it "changes @question's attributes" do
+
+#     end
+
+#     it "redirects to updated question" do
+
+#     end
+
+#   end
+
+  # context 'with invalid attributes' do
+  #   it 'locates the requested contact for update' do
+  #   end
+
+  #   it "does not chabge @question's attributes" do
+  #   end
+
+  #   it 're-renders the edit method' do
+  #   end
+
+  # end
+
+
+# end
 
 
 

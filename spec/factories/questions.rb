@@ -9,5 +9,8 @@ FactoryGirl.define do
 
   factory :invalid_question, parent: :question do |f|
     f.question nil
+    f.submission nil
   end
+
+
 end
