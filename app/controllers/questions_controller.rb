@@ -30,8 +30,7 @@ class QuestionsController < ApplicationController
   def answer
     # TODO
     @question = Question.find(params[:id])
-    @submission = @question.submission
-    render :answer
+    @submission = @question.submission  
   end
 
   private

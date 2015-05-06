@@ -7,8 +7,8 @@
       <h3>correct!</h3>
       <% else %>
       <h3>wrong!</h3>
-   
-      <p> <%= @question.question  %></p>
+      <p> You answered <%= @question.submission %> to "<%= @question.question  %> " </p>
+
       
       <%= form_for @question, method: :patch do |f| -%>
         <%= f.text_field :submission %>
