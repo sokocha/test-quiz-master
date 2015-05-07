@@ -17,7 +17,7 @@
 
     <% else %>
       <h3>wrong!</h3>
-      <p> You answered "<%= @question.submission %>" to "<%=  @question.question  %> " </p>
+      <p> You answered "<%= @question.submission %>" to <%=  simple_format @question.question  %> </p>
 
       <%= form_for @question, method: :patch do |f| -%>
         <%= f.text_field :submission %>
