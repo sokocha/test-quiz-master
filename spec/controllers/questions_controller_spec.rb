@@ -26,13 +26,11 @@ describe 'GET show' do
   end
 end
 
-# describe 'GET new' do
-#   it 'assigns a new question to @question' do
-#     get :new
-#   end
-#   it 'renders the :new template' do
-#   end
-# end
+describe 'GET new' do
+  it 'renders the :new template' do
+    get :new
+  end
+end
 
 describe 'POST create' do
   context 'with valid attributes' do 
