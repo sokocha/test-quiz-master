@@ -83,12 +83,21 @@ describe 'PUT update' do
 
   context 'with invalid attributes' do
     it 'locates the requested contact for update' do
+      put :update, id: @question, question: FactoryGirl.attributes_for(:invalid_question)
+      assigns(:question).should eq(@question)
     end
 
-    it "does not chabge @question's attributes" do
+    it "does not change @question's attributes" do
+      put :update, id: @question, question: FactoryGirl.attributes_for(:invalid_question, question: nil, answer: 'lala', submission: 'bleep blorp')
+      @question.reload
+      @question.answer.should_not eq('lala')
+      @question.submission.should_not eq('bleep blorp')
+      @question.question.should eq('What time is it?')
     end
 
     it 're-renders the edit method' do
+      put :update, id: @question, question: FactoryGirl.attributes_for(:invalid_question)
+      response.should render_template :edit
     end
 
   end
