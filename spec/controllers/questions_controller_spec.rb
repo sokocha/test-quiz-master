@@ -54,42 +54,47 @@ describe 'POST create' do
   end
 end
 
-# describe 'PUT update' do
+describe 'PUT update' do
 
-#   before :each do 
-#     @question = FactoryGirl.attributes_for(:question)
-#   end
+  before :each do 
+    @question = FactoryGirl.create(:question, question: 'What time is it?', answer: 'hammer time', submission: 'bleh')
+  end
 
-#   context 'with valid attributes' do
-#     it 'locates the requested contact for update' do
-#       put :update, id: @question, question: @question
-#       assigns(:question).should eq(@question)
-#     end
+  context 'with valid attributes' do
+    it 'locates the requested contact for update' do
+      put :update, id: @question, question: FactoryGirl.attributes_for(:question)
+      assigns(:question).should eq(@question)
+    end
 
-#     it "changes @question's attributes" do
+    it "changes @question's attributes" do
+      put :update, id: @question, question: FactoryGirl.attributes_for(:question, question: 'How are you?', answer: 'fine, thanks', submission: 'alright')
+      @question.reload
+      @question.question.should eq('How are you?')
+      @question.answer.should eq('fine, thanks')
+      @question.submission.should eq('alright')
+    end
 
-#     end
+    it "redirects to updated question" do
+      put :update, id: @question, question: FactoryGirl.attributes_for(:question)
+      response.should redirect_to @question
+    end
 
-#     it "redirects to updated question" do
+  end
 
-#     end
+  context 'with invalid attributes' do
+    it 'locates the requested contact for update' do
+    end
 
-#   end
+    it "does not chabge @question's attributes" do
+    end
 
-  # context 'with invalid attributes' do
-  #   it 'locates the requested contact for update' do
-  #   end
+    it 're-renders the edit method' do
+    end
 
-  #   it "does not chabge @question's attributes" do
-  #   end
-
-  #   it 're-renders the edit method' do
-  #   end
-
-  # end
+  end
 
 
-# end
+end
 
 
 
